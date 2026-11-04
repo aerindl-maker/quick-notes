@@ -1,17 +1,69 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>QuickNotes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div class="welcome-section">
+    <h1>Add a Note</h1>
+    <p>Save your thoughts and important information.</p>
+  </div>
+
+  <ion-item>
+    <ion-input
+      label="Note Title"
+      labelPlacement="floating"
+      placeholder="Enter note title"
+      [(ngModel)]="newNote.title">
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-textarea
+      label="Content"
+      labelPlacement="floating"
+      placeholder="Write your note here..."
+      [autoGrow]="true"
+      [(ngModel)]="newNote.content">
+    </ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-select
+      label="Category"
+      labelPlacement="floating"
+      [(ngModel)]="newNote.category">
+
+      <ion-select-option value="School">
+        School
+      </ion-select-option>
+
+      <ion-select-option value="Personal">
+        Personal
+      </ion-select-option>
+
+      <ion-select-option value="Important">
+        Important
+      </ion-select-option>
+
+    </ion-select>
+  </ion-item>
+
+  <ion-button
+    expand="block"
+    class="ion-margin-top"
+    (click)="addNote()">
+
+    <ion-icon
+      name="add-circle-outline"
+      slot="start">
+    </ion-icon>
+
+    Save Note
+
+  </ion-button>
+
 </ion-content>

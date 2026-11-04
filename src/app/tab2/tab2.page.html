@@ -1,17 +1,85 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>My Notes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+
+  <ion-searchbar
+    placeholder="Search notes"
+    [(ngModel)]="searchText">
+  </ion-searchbar>
+
+ 
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="doRefresh($event)">
+
+    <ion-refresher-content></ion-refresher-content>
+
+  </ion-refresher>
+
+  <ion-list>
+
+    <ion-item-sliding
+      *ngFor="let note of filteredNotes">
+
+      <ion-item>
+
+        <ion-label>
+
+          <h2>{{ note.title }}</h2>
+
+          <p>{{ note.content }}</p>
+
+          <ion-chip color="primary">
+
+            <ion-label>
+              {{ note.category }}
+            </ion-label>
+
+          </ion-chip>
+
+        </ion-label>
+
+        <ion-button
+          fill="outline"
+          size="small"
+          (click)="updateNote(note)">
+
+          Edit
+
+        </ion-button>
+
+      </ion-item>
+
+      <ion-item-options side="end">
+
+        <ion-item-option
+          color="danger"
+          (click)="deleteNote(note)">
+
+          Delete
+
+        </ion-item-option>
+
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-list>
+
+  <ion-text
+    color="medium"
+    *ngIf="filteredNotes.length === 0">
+
+    <p class="ion-text-center">
+      No notes found.
+    </p>
+
+  </ion-text>
+
 </ion-content>
